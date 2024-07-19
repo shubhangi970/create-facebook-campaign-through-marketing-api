@@ -29,8 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final String accessToken ='EAAlvKgsFbJ0BO4fRWhXdw7CzIWGNp1NdW9DElQbozoeBaqEH574rFDUfzNZBXIk8GZBZCVjTiWCtwRQCZAnZAA05X78jNGJn2R2e5vpmBWZBqbdJ5fRtb8UlmZAbGKPkQyOk0KWVjnJzNLIybLLtbSJGLOJZAfUeRmkZAS2ZC6cBt1Nilkb1VZBINGGPi9wtAZCx2kXq';
-  final String accountId =  'act_3813813875544573';
+  final String accessToken ='EAAlvKgsFbJ0BOzqfry8NZAEX3yL9Kx6qZBesz9iK90MCNxzVZCLp7oe3YDL9U7lsrYlewc0T22NprsvyUf4O0admlJGNPOjrJ7nZBmDF2TTTnae3SdVzyzQMaetOAVOMT8d5ZA8yZBiNb1dkbeDyYY1kVCWgmR6M9hbhcFuvMJz9xkFEwvRZCfBRLH0vxyR62nQ';
+  final String accountId =  'act_378334118609000';
   String _response = '';
 
   Future<void> createCampaign() async {
@@ -112,18 +112,30 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> createAdCreative(String adSetId) async {
     final url = 'https://graph.facebook.com/v13.0/$accountId/adcreatives';
     final body = {
-      'name': 'My Ad Creative',
-      'title': 'Lead Generation Ad',
-      'body': 'Sign up now!',
-      'object_story_spec': jsonEncode({
+      'name': 'test - Creative',
+      'object_story_spec': {
         'page_id': '341255639078524',
         'link_data': {
-          'message': 'Sign up now!',
-          'link': 'https://www.example.com/',
-          'caption': 'example.com',
+          'description': '',
+          'link': 'https://rpitsolutions.com/privacy-policy/',
+          'message': 'message',
+          'name': 'headline',
+          'call_to_action': {
+            'type': 'LEARN_MORE',
+            'value': {
+              'link': 'https://rpitsolutions.com/privacy-policy/',
+              'link_caption': ''
+            }
+          }
         }
-      }),
-      'access_token': accessToken,
+      },
+      'degrees_of_freedom_spec': {
+        'creative_features_spec': {
+          'standard_enhancements': {
+            'enroll_status': 'OPT_IN'
+          }
+        }
+      }
     };
 
     final response = await http.post(
@@ -194,3 +206,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
