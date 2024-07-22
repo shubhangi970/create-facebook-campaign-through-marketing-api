@@ -72,6 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
       'end_time': DateTime.now().add(Duration(days: 7)).toIso8601String(),
       'billing_event': 'IMPRESSIONS',
       'optimization_goal': 'LEAD_GENERATION',
+      'promoted_object': jsonEncode({
+        'page_id': '341255639078524' // Add your page ID here
+      }),
       'targeting': jsonEncode({
         'geo_locations': {
           'countries': ['US'],
@@ -136,9 +139,6 @@ class _MyHomePageState extends State<MyHomePage> {
           }
         }
       }),
-      'promoted_object': jsonEncode({
-        'page_id': '341255639078524' // Your page ID here
-      }),
       'access_token': accessToken,
     };
 
@@ -159,7 +159,6 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
   }
-
 
   Future<void> createAd(String adCreativeId, String adSetId) async {
     final url = 'https://graph.facebook.com/v13.0/$accountId/ads';
