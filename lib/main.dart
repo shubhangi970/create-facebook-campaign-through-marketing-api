@@ -29,8 +29,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final String accessToken ='EAAlvKgsFbJ0BOzqfry8NZAEX3yL9Kx6qZBesz9iK90MCNxzVZCLp7oe3YDL9U7lsrYlewc0T22NprsvyUf4O0admlJGNPOjrJ7nZBmDF2TTTnae3SdVzyzQMaetOAVOMT8d5ZA8yZBiNb1dkbeDyYY1kVCWgmR6M9hbhcFuvMJz9xkFEwvRZCfBRLH0vxyR62nQ';
-  final String accountId =  'act_378334118609000';
+  final String accessToken = 'EAAlvKgsFbJ0BOzqfry8NZAEX3yL9Kx6qZBesz9iK90MCNxzVZCLp7oe3YDL9U7lsrYlewc0T22NprsvyUf4O0admlJGNPOjrJ7nZBmDF2TTTnae3SdVzyzQMaetOAVOMT8d5ZA8yZBiNb1dkbeDyYY1kVCWgmR6M9hbhcFuvMJz9xkFEwvRZCfBRLH0vxyR62nQ';
+  final String accountId = 'act_378334118609000';
   String _response = '';
 
   Future<void> createCampaign() async {
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final url = 'https://graph.facebook.com/v13.0/$accountId/adcreatives';
     final body = {
       'name': 'test - Creative',
-      'object_story_spec': {
+      'object_story_spec': jsonEncode({
         'page_id': '341255639078524',
         'link_data': {
           'description': '',
@@ -128,14 +128,18 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           }
         }
-      },
-      'degrees_of_freedom_spec': {
+      }),
+      'degrees_of_freedom_spec': jsonEncode({
         'creative_features_spec': {
           'standard_enhancements': {
             'enroll_status': 'OPT_IN'
           }
         }
-      }
+      }),
+      'promoted_object': jsonEncode({
+        'page_id': '341255639078524' // Your page ID here
+      }),
+      'access_token': accessToken,
     };
 
     final response = await http.post(
@@ -155,6 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
   }
+
 
   Future<void> createAd(String adCreativeId, String adSetId) async {
     final url = 'https://graph.facebook.com/v13.0/$accountId/ads';
@@ -206,4 +211,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
